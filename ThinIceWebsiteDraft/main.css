@@ -1,0 +1,121 @@
+/* The main CSS for the single page HTML */
+
+/* 
+Sets the font for the whole document to be Arial (if Arial is missing, then Helvetica) 
+If the browser does not have the requested fonts, it will fallback to the generic "font family" or, 
+collection of fonts, that implement the sans-serif definition "Glyphs [that] have stroke endings that are plain"
+    https://developer.mozilla.org/en-US/docs/Web/CSS/font-family#values
+*/
+
+/* Adds styling to the body of the entire webpage */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Sets the font family for the entire page */
+    margin: 0; /* Allows the navbar to be aligned to the top of the page by removing the margin */
+    background-color: rgba(0, 0, 0, 0.199); /* Sets the background color to tranparent */
+}
+
+/***** Background Image *****/
+.background-image {
+    position: fixed; /* Causes the image to not be a part of the normal document which causes it to not push anything */
+    z-index: -1; /* Puts the image behind all of the elements when they are drawn onto the page */
+    top: 0px; /* Ensures the image is placed at the top of the page when it's rendered */
+    object-fit: cover; /* Resizes the image so that it keeps it's aspect ratio, but! 
+                        if it's aspect ratio does not match the aspect ratio of its box, then the object will be clipped to fit (from MDN web docs) */
+    filter: blur(5px); /* Blurs the background */ 
+    width: 100%; /* Sets the size of the image to 100% of the body's width and height */
+    height: 100%;
+}
+
+/***** Navigation Bar *****/
+:root { /* Stores global variables */
+    --dist_between_a: 0.5em; /* Declares the distance between <a> (anchor) elements in the navbar */
+}
+
+.navbar, .navbar>.other-links {
+    display: flex; /* Converts a <nav> tag to a flex container which then converts all of the items within it to flex items */
+    flex-direction: row; /* Tells the browser to display the items in a row instead of a column */
+    background-color: #fff; /* Sets the background color of the navbar */
+}
+
+.navbar a {
+    display: flex; /* Converts each hyperlink to a flex container so that their contents (text and images) become flex items */
+    align-items: center; /* Centers text vertically when there is one line */
+    justify-content: center; /* Centers text horizontally */
+    width: auto; /* Set the width for the hyperlinks in the navbar */
+    height: auto; /* Set the height of the hyperlinks in the navbar */
+    padding: var(--dist_between_a); /* Sets the padding of the <a> tag in all directions to dist_between_a */
+}
+
+/* CSS For the <button> tag that provides the hamburger icon */
+.navbar-toggle {
+    display: none; /* By default, the hamburger menu is hidden */
+}
+
+
+/* Customize the text-links within the navigation bar */
+.navbar a.text-link {
+    text-align: center; /* Forces text to be centered when there is more than one line */
+    text-decoration: none; /* Removes the underlines under the hyperlinks */
+    transition: color 0.3s ease; /* When hovering over the hyperlink, the background color will now "transition" to the new color */
+    font-size: medium; /* Sets the size of the font */
+    color: black; /* Sets the color of the text */
+}
+
+.navbar a.text-link:hover {
+    color: #2263a9; /* When hovering over an element in the navigation bar, change the background color */
+}
+
+/* Customize the image links within the navigation bar (The one image on the top left) */
+.navbar a.image-link {
+    font-weight: bold; /* Set the font in the image to 
+    /* transition: ?? TODO: Add an effect to the image */
+}
+
+.navbar a.image-link:hover {
+    /* TODO: Add an effect to the image */
+}
+
+.navbar a.image-link>img {
+    min-width: 48px; /* Ensure the image's width is at least 48 pixels */
+    min-height: 48px; /* Ensure the image's height is at least 48 pixels */
+    padding: 0 calc(var(--dist_between_a) * 2) 0 0; /* Adds padding to the image to prevent the "On Thin Ice" text from being right next to the image */
+}
+
+/* When the screen is too small (A mobile device like a phone will trigger this code) */
+@media (max-width: 34em) { /* WARNING! The amount of "em's" must be updated when the content in the navbar is updated! */
+    .navbar, .navbar>.other-links {
+        flex-direction: column; /* Changes the direction of the flexbox to column (vertical) */
+        flex: 1; /* Ensures the vertical distance between all of the items is the same */
+        align-items: flex-start; /* Aligns all of the content to the left side of the screen */
+    }
+
+    .navbar>.other-links {
+        display: none; /* Hides the other links so that they are, by default, hidden on mobile devices */
+    }
+    
+    .hamburger-and-home-button {
+        display: flex; /* Turns this div into a flex container */
+        flex-direction: row; /* Forces the home and hamburger menu to be placed horizontally */
+    }
+
+    /* The button in the navbar*/
+    .navbar-toggle {
+        display: flex; /* Turns the contents inside the button into flex items */
+        align-items: center; /* Centers the image inside the flex container */
+        background: none; /* Removes the default background added to buttons */
+        cursor: pointer; /* When the cursor is above the button, it will turn it into a cursor */
+        border: none; /* Removes the default border added to buttons */
+        transition: background-color 0.3s ease; /* Describes how the background color would change for the hamburger menu */
+        padding: var(--dist_between_a); /* Used to try to get the hamburger menu to be aligned with the text below it */
+
+        img {
+            width: 27px; /* Sets the size of the image */
+            height: 27px;
+        }
+    }
+
+    .navbar-toggle:hover {
+        background-color: #2263a949; /* The background color that the hamburger menu transitions to */ 
+    }
+
+}
